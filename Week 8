@@ -1,0 +1,81 @@
+#Project 3
+
+def isSorted(data):
+  """
+  Checks if a list is sorted in ascending order.
+
+  Args:
+      data: A list of any data type.
+
+  Returns:
+      True if the list is sorted, False otherwise.
+  """
+  # Handle empty list as sorted
+  if len(data) <= 1:
+    return True
+
+  # Check each pair of elements for increasing order
+  for i in range(len(data) - 1):
+    if data[i] > data[i + 1]:
+      return False
+  return True
+
+# Test program
+if __name__ == "__main__":
+  # Test cases
+  test_data = [
+      [],
+      [1],
+      [1, 2, 3],
+      [3, 2, 1],  # Not sorted
+      ["apple", "banana", "cherry"],
+      ["cherry", "apple", "banana"],  # Not sorted
+  ]
+
+  for data in test_data:
+    result = isSorted(data)
+    print(f"List: {data}, Sorted: {result}")
+------------------------------------------------------------------
+#Project 6
+
+def myRange(stop, start=None, step=1):
+ 
+  # Handle default values for start and step
+  if start is None:
+    start = 0
+  if step == 0:
+    raise ValueError("Step cannot be zero")
+
+  # Determine increment direction based on step
+  direction = 1 if step > 0 else -1
+
+  # Build the list based on start, stop, and step
+  result = []
+  current = start
+  while direction * (current < stop) > 0:
+    result.append(current)
+    current += step
+  return result
+
+# Test cases
+print(myRange(5))  # Output: [0, 1, 2, 3, 4]
+print(myRange(10, 2))  # Output: [2, 3, 4, 5, 6, 7, 8, 9]
+print(myRange(10, 2, 3))  # Output: [2, 5, 8]
+print(myRange(-5, 0, -2))  # Output: [-4, -2] (negative step)
+# Try with step 0 (raises ValueError)
+# print(myRange(5, step=0))
+-----------------------------------------------------------------------
+#Project 7
+
+def inputFloat(prompt):
+  
+  while True:
+    try:
+      value = float(input(prompt))
+      # Check for single decimal point (optional)
+      if str(value).count('.') > 1:
+        raise ValueError("Invalid input. Only one decimal point allowed.")
+      return value
+    except ValueError:
+      print("Invalid input. Please enter a number with digits and optional single decimal point.")
+
