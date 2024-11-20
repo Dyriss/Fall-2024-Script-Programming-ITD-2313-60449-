@@ -1,0 +1,96 @@
+#Project 1
+
+from tkinter import Tk, Label, Entry, Button, StringVar  # Import StringVar
+
+# Function to calculate tax based on income and dependents
+def calculate_tax():
+  try:
+    income = float(income_entry.get())
+    dependents = int(dependents_entry.get())
+    tax_rate = 0.15  
+    tax = income * tax_rate - dependents * 500  
+    total_tax.set("${:,.2f}".format(tax))  
+  except ValueError:
+    total_tax.set("Error: Invalid input")
+
+# Create the main window
+window = Tk()
+window.title("Tax Calculator")
+
+# Create labels for income and dependents
+income_label = Label(window, text="Gross Income:")
+income_label.grid(row=0, column=0, padx=5, pady=5)
+dependents_label = Label(window, text="Dependents:")
+dependents_label.grid(row=1, column=0, padx=5, pady=5)
+
+# Create entry fields for income and dependents
+income_entry = Entry(window)
+income_entry.grid(row=0, column=1, padx=5, pady=5)
+dependents_entry = Entry(window)
+dependents_entry.grid(row=1, column=1, padx=5, pady=5)
+
+# Create a button to calculate tax
+calculate_button = Button(window, text="Compute", command=calculate_tax)
+calculate_button.grid(row=2, columnspan=2, padx=5, pady=5)
+
+# Create a label to display the total tax
+total_tax_label = Label(window, text="Total Tax:")
+total_tax_label.grid(row=3, column=0, padx=5, pady=5)
+total_tax = StringVar()  # Create the StringVar instance here
+
+total_tax_result = Label(window, textvariable=total_tax)
+total_tax_result.grid(row=3, column=1, padx=5, pady=5)
+
+# Run the main loop
+window.mainloop()
+-------------------------------------------------------------------------------
+#Project 3
+
+from tkinter import Tk, Label, Entry, Button
+
+def convert_to_celsius():
+  try:
+    fahrenheit = float(fahrenheit_entry.get())
+    celsius = (fahrenheit - 32) * 5 / 9
+    celsius_entry.delete(0, 'end')  
+    celsius_entry.insert(0, celsius)  
+  except ValueError:
+    celsius_entry.delete(0, 'end')
+    celsius_entry.insert(0, "Error: Invalid input")
+
+def convert_to_fahrenheit():
+  try:
+    celsius = float(celsius_entry.get())
+    fahrenheit = (celsius * 9 / 5) + 32
+    fahrenheit_entry.delete(0, 'end')
+    fahrenheit_entry.insert(0, fahrenheit)
+  except ValueError:
+    fahrenheit_entry.delete(0, 'end')
+    fahrenheit_entry.insert(0, "Error: Invalid input")
+
+# Create the main window
+window = Tk()
+window.title("Temperature Converter")
+
+# Labels for Fahrenheit and Celsius
+fahrenheit_label = Label(window, text="Fahrenheit:")
+fahrenheit_label.grid(row=0, column=0, padx=5, pady=5)
+celsius_label = Label(window, text="Celsius:")
+celsius_label.grid(row=0, column=1, padx=5, pady=5)
+
+# Entry fields for Fahrenheit and Celsius with initial values
+fahrenheit_entry = Entry(window, width=10)
+fahrenheit_entry.insert(0, 32.0)  # Initial Fahrenheit value
+fahrenheit_entry.grid(row=1, column=0, padx=5, pady=5)
+celsius_entry = Entry(window, width=10)
+celsius_entry.insert(0, 0.0)  # Initial Celsius value
+celsius_entry.grid(row=1, column=1, padx=5, pady=5)
+
+# Buttons for conversion
+convert_to_celsius_button = Button(window, text=">>>", command=convert_to_celsius)
+convert_to_celsius_button.grid(row=2, column=0, padx=5, pady=5)
+convert_to_fahrenheit_button = Button(window, text="<<<", command=convert_to_fahrenheit)
+convert_to_fahrenheit_button.grid(row=2, column=1, padx=5, pady=5)
+
+# Run the main loop
+window.mainloop()
