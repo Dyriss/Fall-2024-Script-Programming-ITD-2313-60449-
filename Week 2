@@ -1,0 +1,37 @@
+#Project 2
+
+edge = float(input("Edge Length: "))
+
+area = 6 * edge**2
+
+print("Surface Area: "+str(area))
+------------------------------------------
+#Project 4
+
+radius = float(input("Radius: "))
+
+diameter = 2 * radius
+
+circumference = diameter * 3.14
+
+surfaceArea = 4 * 3.14 * radius**2
+
+volume = (4.0/3) * 3.14 * radius**3
+
+print(diameter)
+
+print(circumference)
+
+print(surfaceArea)
+
+print(volume)
+------------------------------------------
+#Project 5
+
+Mass = float(input("Mass : "))
+Velocity =float(input("Velocity : "))
+print("")
+
+Momentum = Mass * Velocity
+
+print("The object's momentum is " + str(Momentum))
