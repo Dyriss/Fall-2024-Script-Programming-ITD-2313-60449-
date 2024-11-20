@@ -1,0 +1,110 @@
+#Project 3
+
+import math
+
+def main():
+  print("Think of a number between 1 and 100!")
+
+  # Get lower and upper bounds from user
+  lower_bound = int(input("Enter the lower bound (inclusive): "))
+  upper_bound = int(input("Enter the upper bound (inclusive): "))
+
+  # Validate input (bounds must be positive and lower < upper)
+  if lower_bound <= 0 or upper_bound <= 0 or lower_bound >= upper_bound:
+    print("Invalid input! Bounds must be positive integers with lower bound less than upper bound.")
+    return
+
+  # Calculate minimum number of guesses (using log2)
+  min_guesses = math.ceil(math.log2(upper_bound - lower_bound + 1))
+
+  # Guessing loop
+  guess_count = 0
+  while guess_count < min_guesses:
+    guess_count += 1
+
+    # Calculate the middle point for the guess
+    guess = (lower_bound + upper_bound) // 2
+
+    # Get user hint (improved to prevent cheating)
+    hint = input(f"Is your number higher (h), lower (l), or equal (e) to {guess}?: ").lower()
+
+    if hint not in ("h", "l", "e"):
+      print("Invalid hint! Please enter 'h', 'l', or 'e'.")
+      continue  # Skip this iteration and ask for a valid hint
+
+    # Update bounds based on hint
+    if hint == "h":
+      lower_bound = guess + 1
+    elif hint == "l":
+      upper_bound = guess - 1
+    else:
+      break  # User entered 'e', number is found
+
+  # Print result based on guess count
+  if guess_count == min_guesses:
+    print(f"Hooray! I've guessed your number in {guess_count} tries (minimum possible)!")
+  else:
+    print(f"I guessed your number in {guess_count} tries.")
+
+if __name__ == "__main__":
+  main()
+-------------------------------------------------------------------------------
+#Project 7
+
+def main():
+  # Get user input for starting salary, increase percentage, and number of years
+  starting_salary = float(input("Enter the starting salary: $"))
+  percentage_increase = float(input("Enter the annual percentage increase: "))
+  number_of_years = int(input("Enter the number of years in the schedule: "))
+
+  # Print table header
+  print("\nYear\tSalary")
+  print("----\t------")
+
+  # Calculate and display salary for each year
+  for year in range(1, number_of_years + 1):
+    # Calculate salary with annual increase
+    salary = starting_salary * (1 + (percentage_increase / 100)) ** (year - 1)
+    # Print year and salary with two decimal places
+    print(f"{year}\t${salary:.2f}")
+
+if __name__ == "__main__":
+  main()
+---------------------------------------------------------------------------------
+#Project 10
+
+def main():
+  # Get purchase price from user
+  purchase_price = float(input("Enter the purchase price: $"))
+
+  # Calculate down payment and remaining balance
+  down_payment = purchase_price * 0.1
+  remaining_balance = purchase_price - down_payment
+
+  # Set monthly payment and interest rate
+  monthly_payment = purchase_price * 0.05
+  annual_interest_rate = 0.12
+
+  # Print table header
+  print("\nMonth\tBalance\tInterest\tPrincipal\tPayment\tRemaining Balance")
+  print("-----\t-------\t-------\t-------\t-------\t-----------------")
+
+  # Loop for each month until balance is paid off
+  month = 1
+  while remaining_balance > 0:
+    # Calculate monthly interest
+    monthly_interest = remaining_balance * annual_interest_rate / 12
+
+    # Calculate principal paid (payment - interest)
+    principal_paid = monthly_payment - monthly_interest
+
+    # Update remaining balance
+    remaining_balance -= principal_paid
+
+    # Print month details with two decimal places
+    print(f"{month}\t${remaining_balance:.2f}\t${monthly_interest:.2f}\t${principal_paid:.2f}\t${monthly_payment:.2f}\t${remaining_balance:.2f}")
+
+    month += 1
+
+if __name__ == "__main__":
+  main()
