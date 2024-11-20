@@ -1,0 +1,105 @@
+#Project 1
+
+import turtle
+import math
+
+def drawCircle(turtle, x, y, radius):
+    turtle.penup()
+    turtle.goto(x, y - radius)
+    turtle.pendown()
+    circumference = 2.0 * math.pi * radius
+    distance = circumference / 120.0
+
+    for _ in range(120):
+        turtle.forward(distance)
+        turtle.left(3)
+
+def main():
+    turtle.setup(width=800, height=600)
+    window = turtle.Screen()
+    bob = turtle.Turtle()
+    x = 50
+    y = 75
+    radius = 100
+
+    drawCircle(bob, x, y, radius)
+
+    window.exitonclick()
+
+main()
+
+-------------------------------------------------------
+#Project 3
+
+import turtle
+import math
+
+def drawFractalLine(turtle, length, angle, level):
+    if level == 0:
+        turtle.forward(length)
+    else:
+        drawFractalLine(turtle, length / 3, angle, level - 1)
+        turtle.left(60)
+        drawFractalLine(turtle, length / 3, angle, level - 1)
+        turtle.right(120)
+        drawFractalLine(turtle, length / 3, angle, level - 1)
+        turtle.left(60)
+        drawFractalLine(turtle, length / 3, angle, level - 1)
+
+def drawKochSnowflake(turtle, size, level):
+    turtle.penup()
+    turtle.goto(-size / 2, size / 2 * math.sqrt(3) / 3)
+    turtle.pendown()
+
+    for i in range(3):
+        drawFractalLine(turtle, size, 0, level)
+        turtle.right(120)
+
+# Set up the turtle graphics window
+turtle.setup(width=800, height=600)
+window = turtle.Screen()
+window.bgcolor("white")
+
+# Create a turtle object
+bob = turtle.Turtle()
+bob.speed(0)  # Set the drawing speed to the fastest
+
+# Draw the Koch snowflake
+drawKochSnowflake(bob, 200, 3)  # Adjust the size and level as desired
+
+# Keep the window open until it's closed manually
+window.exitonclick()
+-----------------------------------------------------------------------
+#Project 8
+
+from images import Image
+
+def sepia(image):
+    """Converts the argument image to sepia."""
+    for y in range(image.getHeight()):
+        for x in range(image.getWidth()):
+            (r, g, b) = image.getPixel(x, y)
+
+            
+            r = int(r * 0.393 + g * 0.769 + b * 0.189)
+            g = int(r * 0.349 + g * 0.686 + b * 0.168)
+            b = int(r * 0.272 + g * 0.534 + b * 0.131)
+
+            
+            r = min(max(r, 0), 255)
+            g = min(max(g, 0), 255)
+            b = min(max(b, 0), 255)
+
+            image.setPixel(x, y, (r, g, b))
+
+def main(filename = "smokey.gif"):
+    image = Image(filename)
+    print("Close the image window to continue. ")
+    image.draw()  
+
+    sepia(image)
+    print("Close the image window to quit. ")
+    image.draw()
+
+if __name__ == "__main__":
+    main()  
