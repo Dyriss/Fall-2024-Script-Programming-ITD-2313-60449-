@@ -1,0 +1,91 @@
+#Project 1
+
+def is_equilateral(side1, side2, side3):
+  """
+  This function checks if the three sides form an equilateral triangle.
+
+  Args:
+      side1 (float): Length of the first side of the triangle.
+      side2 (float): Length of the second side of the triangle.
+      side3 (float): Length of the third side of the triangle.
+
+  Returns:   
+
+      bool: True if the triangle is equilateral, False otherwise.
+  """  
+
+  # Check if all sides are equal
+  return side1 == side2 and side2 == side3
+
+def main():
+
+  side1 = float(input("Enter the length of side 1: "))
+  side2 = float(input("Enter the length of side 2: "))
+  side3 = float(input("Enter the length of side 3: "))
+
+  if is_equilateral(side1, side2, side3):
+    print("The triangle is equilateral.")
+  else:
+    print("The triangle is not equilateral.")
+
+if __name__ == "__main__":
+  main()
+--------------------------------------------------------------------------
+#Project 4
+
+def calculate_bouncing_distance(initial_height, bounces, bounciness_index=0.6):
+ 
+
+  total_distance = initial_height
+  for _ in range(bounces):
+    total_distance += 2 * initial_height * bounciness_index
+    initial_height *= bounciness_index
+
+  return total_distance
+
+def main():
+
+  initial_height = float(input("Enter the initial height (in feet): "))
+  bounces = int(input("Enter the number of bounces: "))
+
+  total_distance = calculate_bouncing_distance(initial_height, bounces)
+  print("Total distance traveled: {:.2f} feet".format(total_distance))
+
+if __name__ == "__main__":
+  main()
+------------------------------------------------------------------------------
+#Project 5
+
+def predict_population(initial_population, growth_rate, growth_period, total_time):
+
+
+  # Check for valid growth rate
+  if growth_rate <= 0:
+    raise ValueError("Growth rate must be greater than 0.")
+
+  # Calculate the growth factor per growth period
+  growth_factor = 1 + growth_rate
+
+  # Calculate the number of growth periods
+  num_periods = int(total_time / growth_period)
+
+  # Calculate the final population
+  final_population = initial_population * (growth_factor ** num_periods)
+
+  return final_population
+
+def main():
+ 
+  try:
+    initial_organisms = int(input("Enter the initial number of organisms: "))
+    growth_rate = float(input("Enter the growth rate (greater than 0): "))
+    growth_time = float(input("Enter the number of hours to achieve growth rate: "))
+    total_hours = float(input("Enter the total number of hours for growth: "))
+
+    predicted_population = predict_population(initial_organisms, growth_rate, growth_time, total_hours)
+    print("Predicted population after", total_hours, "hours:", predicted_population)
+  except ValueError as e:
+    print("Error:", e)
+
+if __name__ == "__main__":
+  main()
